@@ -1,0 +1,598 @@
+@include thumb;
+@import url(http://weloveiconfonts.com/api/?family=entypo|fontawesome|maki|typicons|zocial);
+
+/* entypo */
+[class*="entypo-"]:before {
+	font-family: 'entypo', sans-serif;
+}
+
+/* fontawesome */
+[class*="fontawesome-"]:before {
+	font-family: 'FontAwesome', sans-serif;
+}
+
+/* maki */
+[class*="maki-"]:before {
+	font-family: 'maki', sans-serif;
+}
+
+/* typicons */
+[class*="typicons-"]:before {
+	font-family: 'Typicons', sans-serif;
+}
+
+/* zocial */
+[class*="zocial-"]:before {
+	font-family: 'zocial', sans-serif;
+}
+
+html,
+body {
+	height: 100%;
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background: url(../img/logoBg.png)fixed no-repeat bottom left;
+}
+
+.panel {
+
+	border:0;
+	background: #f8f8f8;
+}
+
+h6 {
+	margin-top: 0;
+}
+
+
+
+
+#obrasTipo h6 {
+	color: white;
+}
+
+#menu { 
+	position: fixed;
+	padding-top: 13px;
+	min-height: 65px;
+	width: 100%;
+	background: rgb(33,139,197);
+	z-index: 998;
+}
+
+.menuItem {
+	transition:color .5s;
+	-webkit-transition:color .5s; /* Safari */
+	-moz-transition:color .5s; /* Safari */
+	-o-transition:color .5s; /* Safari */
+}
+
+.menuItemDrop{
+	transition:color .5s;
+	-webkit-transition:color .5s; /* Safari */
+	-moz-transition:color .5s; /* Safari */
+	-o-transition:color .5s; /* Safari */
+}
+
+.menuItem:hover {
+	color: rgb(199, 242, 255);
+}
+
+.menuItemDrop:hover{
+	color: #2795b6;
+}
+
+#menuLogo {
+	position: absolute;
+	width: 300px;
+	height:auto;
+	top: -77px;
+	left: -22px;
+	z-index: 999;
+}
+
+#mainLogoCont {
+	margin-left: 20px;
+}
+
+#mainLogo {
+	height: 40px;
+	width: auto;
+}
+
+#logoB {
+	position: absolute;
+	height: 52px;
+	margin-left: 15px;
+}
+
+#menu .button {
+	background-color: rgba(0,0,0,0);
+	border-color: rgba(0,0,0,0);
+	border: none;
+	-webkit-box-shadow:none;
+	-moz-box-shadow:none;
+	-o-box-shadow:none;
+	box-shadow:none;
+}
+
+#contactoSide h5 span { 
+	display: block; 
+	color: white;
+} 
+
+#contactoSide {
+	position: fixed;
+	border-radius: 5px 0 0 5px;
+	background: rgba(0,0,0,.5);
+	width: 50px;
+	min-height: 300px;
+	right: 0px;
+	top: 30%;
+	z-index: 2;
+	cursor: pointer;
+}
+
+.cursorPointer {
+	cursor: pointer;
+}
+
+#revistaSide {
+	padding-top: 10px;
+	cursor: pointer;
+	position: fixed;
+	border-radius: 0 5px 5px 0;
+	background: rgba(0,0,0,.5);
+	width: 37px;
+	left: 0px;
+	top: 30%;
+	z-index: 2;
+}
+
+#revistaSide a h5 span { 
+	display: block; 
+	color: white;
+	font-size: 12px;
+} 
+
+#contactoModal {
+	z-index: 1000;
+}
+
+.relativeX{
+	position: relative;
+}
+
+#ribbon {
+	position: absolute;
+	right: -24px;
+	bottom: -100px;
+	width: 313px;
+	height: 82px;
+	background: url(../img/ribbon.png);
+	z-index: 97;
+}
+
+#title {
+	text-align: center;
+}
+
+#title h2 {
+	color: white;
+}
+
+#section1{
+	background: url(../img/sky3.jpg) 50% 0  fixed;
+	background-size: 100% auto;
+	margin: 0;
+	overflow: hidden;
+}
+
+.slideshow-wrapper {
+	height: auto;
+	background: rgba(0,0,0,.5);
+}
+
+.prevSlider {
+	position: absolute;
+	left: -80px;
+	font-size: 50px;
+	color: white;
+	padding: 10px;
+	background: rgba(0,0,0,.2);
+	top: 300px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.nextSlider {
+	position: absolute;
+	right: -80px;
+	font-size: 50px;
+	color: white;
+	padding: 10px;
+	background: rgba(0,0,0,.2);
+	top: 300px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+
+#product {
+	color: black;
+}
+
+.shopp {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+div.shopp div.productName {
+	width: 150px;
+	float: left;
+}
+
+div.shopp div.shopp-price {
+	width: 70px;
+	float: left;
+}
+
+i.remove {
+	float: right;
+}
+
+div.shopp span {
+	float: left;
+}
+
+#section1Load {
+	margin-top: 123px;
+}
+
+#section1Load img{
+	border-radius: 5px 5px 0 0;
+}
+
+.content p{
+	color: black;
+}
+
+.blackFont {
+	color: black;
+}
+
+#strip{
+	min-height: 43px;
+	background: rgb(33,139,197);
+	padding: 13px;
+	text-align: right;
+	z-index: 1;
+}
+
+.stats .center{
+	text-align: center;
+}
+
+.stats center {
+	font-size: 22px;
+	line-height: 35px;
+}
+
+select {
+	padding:3px;
+	padding-top: 10px;
+	padding-bottom:10px; 
+	background: white;
+	border: 1px solid #999999;
+	-webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+	-o-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+	-mox-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+strong {
+	color: white;
+}
+
+#strip strong {
+	color: white;
+}
+
+.shadow {
+	-o-box-shadow: 0px 0px 23px rgba(50, 50, 50, 0.4);
+	-webkit-box-shadow: 0px 0px 23px rgba(50, 50, 50, 0.4);
+	-moz-box-shadow:    0px 0px 23px rgba(50, 50, 50, 0.4);
+	box-shadow:         0px 0px 23px rgba(50, 50, 50, 0.4);
+}
+
+#especialidadesOrbit{
+	border-radius: 5px 5px 0 0;
+	overflow: hidden;
+}
+
+
+
+.orbit-container:hover .orbit-timer> span {
+	display:none;
+}
+
+#especialidadesOrbit .orbit-bullets {
+	position: absolute;
+	bottom: 10px;
+	left: 10px;
+}
+
+.cartTable {
+	overflow: scroll;
+}
+
+.f-dropdown:before {
+	left: 50%;
+}
+
+.f-dropdown:after {
+	left: 50%;
+}
+
+#especialidadesOrbit .orbit-slide-number {
+	display: none;
+}
+
+#orbitContainer1 .orbit-container {
+	background: rgba(0,0,0,0);
+}
+
+.orbit-prev {
+	visibility:hidden;
+}
+
+.orbit-next {
+	visibility:hidden;
+}
+
+
+#orbitContainer1 img {
+	height:213px;
+	width: auto;
+	padding-top: 5px;
+}
+
+#productosCatalogo img {
+	width: auto;
+	height:200px;
+}
+
+#empresaProductos img {
+	width: 200px;
+	height:195px;
+}
+
+.carousel a {
+	width: 168px;
+	margin: 10px;
+}
+
+.hideX {
+	display: none;
+}
+
+.downArrow {
+	height: 20px;
+	width: auto;
+	position: relative;
+	right: 0px;
+}
+
+.widewidth {
+	width: 100%;
+	height: auto;
+}
+
+.wideHeigth {
+	width: 100%;
+	height: 172px;
+}
+
+.reveal-modal {
+	z-index: 1000;
+}
+
+#especialidadesAccordion .title {
+	font-size: 19px;
+}
+
+#especialidadesAccordion h3 {
+	font-size: 17px;
+}
+
+#especialidadesAccordion p {
+	font-size: 13px;
+	text-align:justify;
+}
+
+#headerText {
+	position: absolute;
+	margin: 50px;
+	background: rgba(0,0,0,.5);
+	border: none;
+	border-radius: 5px;
+	-webkit-box-shadow: 0px 0px 14px rgba(50, 50, 50, 0.75);
+	-moz-box-shadow:    0px 0px 14px rgba(50, 50, 50, 0.75);
+	-o-box-shadow:    0px 0px 14px rgba(50, 50, 50, 0.75);
+	box-shadow:         0px 0px 14px rgba(50, 50, 50, 0.75);
+}
+
+#headerText h2{
+	color:whitesmoke;
+}
+
+#headerText h4{
+	color:whitesmoke;
+}
+
+#obrasTipo {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+#myModal p{
+	color: black;
+}
+
+#obrasTipo img {
+	width: 100%;
+	height: auto;
+}
+
+#productsTable h4 ,
+#usersTable h4 {
+	font-size: 19px;
+	font-style: bold;
+}
+
+#productsTable a i,
+#usersTable a i {
+	color: black;
+}
+
+#productsTable a i:hover,
+#usersTable a i:hover {
+	color: gray;
+}
+
+.logoObra {
+	width: 90%;
+}
+
+
+.btnsImg {
+	position: absolute;
+	width: 120px;
+	right: -5px; 
+	top: 180px;
+}
+
+#preview-pane .preview-container {
+	width: 120px;
+	height: 120px;
+	overflow: hidden;
+}
+
+.full-modal {
+	background-size: 100% 100% !important;
+	background-repeat: no-repeat !important;
+	width: auto;
+	top: 138px !important;
+	position: fixed;
+	max-height: 80%;
+	overflow: auto;
+}
+
+.cropWidth{
+	width:80px; 
+	
+}
+
+#cropControls{
+	z-index: 1000;
+}
+
+.black{
+	color:black;
+}
+
+.croppedImg{
+	width: 50%;
+}
+
+.textR {
+	display: block;
+	float: right;
+	text-align: right;
+}
+
+.prShadow {
+	box-shadow: 0px 0px 8px rgba(0,0,0,.2);
+}
+
+.addMagFix {
+	width: 200px;
+	
+	float: right;
+	position: fixed;
+}
+
+
+
+/* We use this media query to add styles to any device that supports media queries */
+@media only screen {
+	#headerText {
+		position: relative;
+		margin: 0px;
+	}
+}
+
+/* Used to alter styles for screens at least 768px wide. This is where the grid changes. */
+@media only screen and (min-width: 768px) {
+	#menu { 
+		position: fixed;
+		padding-top: 13px;
+		min-height: 65px;
+		width: 100%;
+		background: rgb(33,139,197);
+		z-index: 98;
+	}
+
+	#menuLogo {
+		position: absolute;
+		width: 300px;
+		height:auto;
+		top: -77px;
+		left: -22px;
+		z-index: 98;
+	}
+
+	#headerText {
+		position: absolute;
+		margin: 50px;
+
+	}
+
+
+	.slideshow-wrapper {
+		height: 417px;
+		background: rgba(0,0,0,.5);
+	}
+
+
+}
+
+.clear{
+	clear:left;
+}
+
+
+
+.reveal-close-icon {
+	color: #000000;
+	font-size: 20px;
+	position: absolute;
+	right: 10px;
+	top: 10px;
+}
+
+/* Used to alter styles for screens at least 1280px wide. */
+@media only screen and (min-width: 1280px) {}
+
+/* Used to alter styles for screens at least 1440px wide. */
+@media only screen and (min-width: 1440px) {}
+
+/* Apply styles to screens in landscape orientation */
+@media only screen and (orientation: landscape) {}
+
+/* Apply styles to screens in portrait orientation */
+@media only screen and (orientation: portrait) {}

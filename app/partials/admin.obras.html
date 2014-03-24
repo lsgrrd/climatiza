@@ -1,0 +1,171 @@
+<div class="row">
+	
+	<div class="large-12 columns">
+		<h3><span class="fontawesome-building"></span>  Administrar Obras</h3>	
+		<table class="large-12 responsive" id="productsTable">
+			<tr>
+				<th><h4>Nombre</h4></th>
+				<th><h4>Categoria</h4></th>
+				<th><h4><i class="foundicon-tools"></h4></th>
+			</tr>
+			<tr ng-repeat="o in obrasList">
+				<th>{{o.nombre}}</th>
+				<th>{{o.categoria}}</th>
+				<th>
+					<a href="" ng-click="prepararObra('Edit',o)"><i class="foundicon-edit"></i></a>
+					
+					<a href="" ng-click="agregarLogoObra(o)" ><i class="foundicon-smiley"></i></a>
+
+					<a href=""  ng-click="agregarImagenObra(o)" ><i class="foundicon-video"></i></a>
+
+					<a href="" ng-show="!!o.imagenes.length" ng-click="verImagenes(o)" ><i class="entypo-eye"></i></a>
+
+					<a href=""  ng-click="eliminarObra(o)"><i class="foundicon-trash"></i></a>
+				</th>
+			</tr>
+		</table>
+		<a href="" class="button" ng-click="prepararObra('Insert')">Agregar Obra</a>
+	</div>
+</div>
+
+
+
+<div id="agregarObra" class="reveal-modal small full-modal">
+	<h2>{{submitTitle}}</h2>
+	<form novalidate name="frmObra" id="frmObra"> 
+		<div class="row">
+			<div class="large-12 columns">
+				<label>Nombre:</label>
+				<input type="text" placeholder="Nombre de la obra" ng-model="obra.nombre" required >
+			</div>
+		</div>
+		<div class="row">
+			<div class="large-12 columns">
+				<label for="">Categoria</label>
+				<select name="categoria" ng-model="obra.categoria" required>
+					<option value="" selected>Seleccione una categoria</option>
+					<option value="Hogar">Hogar</option>
+					<option value="Comercial">Comercial</option>
+					<option value="Industrial">Industrial</option>
+
+				</select>
+
+				<small class="error" ng-show="checkError('categoria','required')">Seleccione una categoria
+				</small>
+			</div>
+		</div>
+		<div class="row">
+			<div class="large-12 columns">
+				<label>Introducción:</label>
+				<textarea type="text" placeholder="Introduccion del la obra"
+				ng-model="obra.intro"
+				required></textarea>
+			</div>
+		</div>
+		<div class="row">
+			<div class="large-12 columns">
+				<label>Descripcion:</label>
+				<textarea type="text"
+
+				ng-model="obra.descripcion"
+				placeholder="Descripcion de la Obra" required></textarea>
+			</div>
+		</div>
+		<div class="row">
+			<div class="large-12 columns">
+				<label>Video:</label>
+				<input type="text" placeholder="Video URL" ng-model="obra.videoURL" required/>
+			</div>
+		</div>
+
+
+		<button type="submit" ng-click="procesarObra(obra)">{{submitTitle}}</button>
+	</form>
+	<a class="close-reveal-modal">&#215;</a>
+</div>
+
+<div id="agregarLogoObra" class="reveal-modal small full-modal">
+
+	<h2>Agregar logotipo</h2>
+
+	<form id="frmLogoObraUpload" class="upload" method="post" action="agregarLogoObra" enctype="multipart/form-data">
+		<div id="logoObraDrop" class="drop panel">
+			<h4>Arrastrar Imagen(es)</h4>
+
+			<a class="button">Buscar</a>
+			<input type="file" name="upl" multiple />
+		</div>
+
+
+		<ul>
+
+		</ul>
+
+	</form>
+
+	<a class="close-reveal-modal" ng-click="clearLogoForm()" >&#215;</a>
+</div>
+
+
+
+
+
+<div id="agregarImagenObra" class="reveal-modal small full-modal">
+
+	<h2>Agregar Imagen</h2>
+
+	<form id="frmImagenObraUpload" class="upload" method="post" action="agregarImagenObra" enctype="multipart/form-data">
+		<div id="ImagenObraDrop" class="drop panel">
+			<h4>Arrastrar Imagen(es)</h4>
+
+			<a class="button">Buscar</a>
+			<input type="file" name="upl" multiple />
+		</div>
+
+
+		<ul>
+
+		</ul>
+
+	</form>
+
+	<a class="close-reveal-modal" >&#215;</a>
+</div>
+
+
+
+<div id="imageViewer" class="reveal-modal medium full-modal">
+
+	<h2>Ver Imágenes</h2>
+
+<div class="large-9 columns ">
+		<ul >
+			<li ><img  ng-src="{{cropImageSrc}}"></li> 
+		</ul>
+	</div>
+
+	<div class="large-3 columns" id="cropControls">
+		<canvas id="preview" style="width:150px;height:150px;overflow:hidden;"></canvas>
+		<div class="columns large-12">
+
+			<ul class="button-group round even-2">
+				<li ng-show="current.imagenes.length>1"><button class="button " ng-click="nextImage()"><class class="fontawesome-arrow-left"></class></button></li>
+				<li ng-show="current.imagenes.length>1"><button  class="button " ng-click="previousImage()"><class class="fontawesome-arrow-right"></class></button></li>
+			</ul>
+			
+			
+			<button ng-click="confirmDeleteImage()" ng-show="!confirmDeleteImageFlag">Eliminar Imagen</button>
+		</div>
+		<div class="large-12 columns" ng-show="confirmDeleteImageFlag">
+			<p>Esta seguro que desea eliminar la imagen?</p>
+			<button class="small-6 columns success small" ng-click="deleteImage()">Si</button>
+			<button class="small-6 columns alert small" ng-click="confirmDeleteImageFlag=!confirmDeleteImageFlag">No</button> 
+
+		</div>	
+
+
+	</div>
+
+	<a class="close-reveal-modal" >&#215;</a>
+</div>
+

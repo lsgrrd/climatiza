@@ -1,0 +1,108 @@
+<div  class="hideX">
+  <div id="title"><h2>Bienvenido</h2></div>
+  <div id="section1Cont" >
+
+    <div id="especialidadesOrbit" class="shadow">
+      <div class="prevSlider">
+        <span class="entypo-left-dir"></span>
+      </div>
+      <div class="nextSlider">
+        <span class="entypo-right-dir"></span>
+      </div>
+      <div class="large-12">
+        <div class="slideshow-wrapper">
+          <div class="preloader"></div>
+          <ul data-orbit>
+            <li>
+              <img src="img/slider7.jpg" alt="slide image" >         
+            </li>
+            <li>
+              <img src="img/slider8.jpg" alt="slide image" >
+            </li>
+            <li>
+              <img src="img/slider9.jpg" alt="slide image" >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="large-12 columns" id="section2Cont">
+  <br>
+  <h3>Novedades</h3>
+  <div id="orbitContainer1">
+
+    <ul data-orbit>
+
+      <li>
+
+        <div class="large-3 small-6 columns "  ng-click="showProductDetails(p)" ng-repeat="p in row1">
+          <center class="prShadow"><img ng-src="./ImagenesProductos/thumbs/{{p.thumb.imageName}}.png" /> </center>
+          <h6 class="panel prShadow">{{p.Nombre}}</h6>
+        </div>
+
+      </li>
+      <li>
+
+
+        <div ng-click="showProductDetails(x)" class="large-3 small-6 columns"  ng-class="{left:row2.length<4}" ng-repeat="x in row2" >
+          <center class="prShadow"><img ng-src="./ImagenesProductos/thumbs/{{x.thumb.imageName}}.png" /> </center>
+          <h6 class="panel prShadow">{{x.Nombre}}</h6>
+        </div>
+
+
+      </li>
+    </ul>
+  </div> 
+
+  <div class="large-8 columns">
+    <div class="panel">
+
+      <h4>Proyectamos</h4>
+      <span class="black">Diseño de ambientes para todos</span>
+      <hr/>
+      <div class="row">
+        <div class="large-6 small-6 columns">
+
+          <p class="subheader">
+            Contamos con el respaldo de las principales marcas  Mirage, Trane,  Carrier, York,  McQuay.
+            Para dar el mejor servicio en garanta y refacciones de sus unidades de aire acondicionado. Desde un  minisplit hasta unidades de gran capacidad.
+          </p>
+          <div class="show-for-small" align="center">
+            <br>
+            <a href="#" class="small radius button" data-reveal-id="contactoModal">Contactanos</a>
+
+          </div>
+        </div>
+        <div class="large-6 small-6 columns">
+          <p>
+            En nuestro personal encontrará; La mejor opción para su proyecto de aire acondicionado. 
+            Ya que se encuentra calificado para recomendar la capacidad requerida para su hogar, oficina, negocio ó  local;  En las dimensiones que se requieran.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="large-4 columns hide-for-small">
+    <h4>Contáctanos!</h4><hr/>
+    <a href="#">
+      <div class="button large-12 callout" data-reveal-id="contactoModal" align="center">
+        <strong>Email <i class="foundicon-mail"></i></strong>
+      </div>
+    </a>
+    <a href="#">
+      <div class="button large-12 callout" data-reveal-id="contactoModal" align="center">
+        <strong>Teléfono <i class="foundicon-phone"></i></strong>
+      </div>
+    </a>
+    <a href="#">
+      <div class="button large-12 callout" data-reveal-id="contactoModal" align="center">
+        <strong>Mapa <i class="foundicon-location"></i></strong>
+      </div>
+    </a>
+  </div>
+</div>

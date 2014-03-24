@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width" />
+
+  <title>Cotización</title>
+
+  <link rel="stylesheet" href="../css/foundation.css" />
+  <link rel="stylesheet" href="../css/general_foundicons.css" />
+  <link type="text/css" media="screen" rel="stylesheet" href="css/responsive-tables.css" />
+  
+  <link rel="stylesheet" type="text/css" media="print" href="../css/print.css" />
+  <script src="lib/vendor/custom.modernizr.js"></script>
+  
+  <style>
+  @import url(http://weloveiconfonts.com/api/?family=entypo);
+
+  /* entypo */
+  [class*="entypo-"]:before {
+    font-family: 'entypo', sans-serif;
+  }
+
+  .printBtn {
+    border-radius: 0px 0px 10px 10px;
+    background: whitesmoke;
+    padding: 10px;
+
+  }
+
+
+
+
+  </style>
+  <% 
+
+  function formatCurrency(num) {
+    num = num.toString().replace(/\$|\,/g, '');
+    if (isNaN(num)) num = "0";
+      sign = (num == (num = Math.abs(num)));
+      num = Math.floor(num * 100 + 0.50000000001);
+      cents = num % 100;
+      num = Math.floor(num / 100).toString();
+      if (cents < 10) cents = "0" + cents;
+        for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++)
+          num = num.substring(0, num.length - (4 * i + 3)) + ',' + num.substring(num.length - (4 * i + 3));
+          return (((sign) ? '' : '-') + '$' + num + '.' + cents);
+        }
+
+
+        var formatDate = function(d){
+
+
+          var curr_date = d.getDate();
+          var curr_month = d.getMonth();
+          curr_month++;
+          var curr_year = d.getFullYear()
+
+          return curr_date+"/"+curr_month+"/"+curr_year; 
+        }
+
+
+        var getServicioDate = function(Fecha,servicio){
+          var fechaDeCompra = new Date(Fecha);
+
+          var servicioDate = new Date(new Date(fechaDeCompra).setMonth(fechaDeCompra.getMonth()+servicio));
+          return servicioDate;
+        }
+
+
+        %>
+
+      </head>
+      <body>
+
+        <div class="row">
+          <div class="large-12 columns">
+            <span class="right printBtn noPrint" onclick="window.print()
+            " >Imprimir <span class="entypo-print"></span> </span>
+            <br>
+            <span><img src="../img/mainLogo.png" alt=""></span>
+            <br>
+            <hr>
+          </div>
+
+          <div class="large-12 columns">
+            <%
+
+            
+            var curr_date = cot.Fecha.getDate();
+            var curr_month = cot.Fecha.getMonth();
+            curr_month++;
+            var curr_year = cot.Fecha.getFullYear()
+
+
+
+            %>
+            <div>
+              <h4>Cotizaciones</h4>
+              <div><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea, error, pariatur, repudiandae, tempore praesentium nobis nihil facilis deserunt obcaecati molestiae minus sunt accusamus eius culpa distinctio atque dicta id explicabo.</p></div>
+
+              <hr>
+              <div >
+                <% if (cot.numeroFactura){ %><span class="black">Numero de factura: <%=cot.numeroFactura%></span> <% }%>
+                <span class="right black"><span class="entypo-calendar"></span> Fecha de cotizacion: <%=formatDate(cot.Fecha)%></span>
+                <br>
+                <br>
+                <table width="100%">
+                  <thead>
+                    <tr>
+                      <th>Modelo del producto</th>
+                      <th>Descripcion</th>
+                      <th>Precio unitario</th>
+                      <th>Cantidad</th>
+                      <% if(cot.estado=="Finalizada"){ %>
+                      <th>Proximo Servicio</th>
+                      <%} %>
+                      <th>Precio Neto</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% 
+                    var total=0;
+                    for(var i=0; i<cot.productos.length; i++){
+
+                      var tmp = cot.productos[i].cantidad*cot.productos[i].Precio;
+                      total+=tmp;
+
+                      %>
+
+                      <tr>
+                        <td><%=cot.productos[i].Nombre%></td>
+                        <td><%=cot.productos[i].Descripcion%></td>
+                        <td><%= formatCurrency (cot.productos[i].Precio )%></td>
+                        <td><%=cot.productos[i].cantidad%></td>
+
+
+                        <%
+                        if(cot.estado=="Finalizada"){
+                          var servicioDate = getServicioDate(cot.Fecha,cot.productos[i].servicio);
+
+                          var output = cot.productos[i].servicio ? formatDate(servicioDate) : "";
+                          %>
+
+                          <td><%=output%></td>
+
+                          <% } %>
+
+
+
+                          <td><%= formatCurrency (tmp) %></td>
+                        </tr>
+
+                        <%}%>
+
+
+                      </tbody>
+                    </table>
+                    <div class="row">                                    
+                      <div class="large-12 columns">
+                        <span class="right black">Total: <%= formatCurrency (total)%></span>
+                      </div>
+                    </div>
+                    <br><br><hr>
+                  </div>    
+
+
+
+                </div>
+
+              </div>
+            </div>
+
+
+
+
+          </body>
+
+          <script src="lib/jquery-1.10.1.min.js"></script>
+
+          <script src="lib/foundation.min.js"></script>
+
+          </html>

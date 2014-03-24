@@ -1,0 +1,107 @@
+<div  class="hideX">
+  <div id="title"><h2>Obras</h2></div>
+  <div id="section1Cont" >
+
+    <div id="especialidadesOrbit" class="shadow">
+      <div class="prevSlider">
+        <span class="entypo-left-dir" ></span>
+      </div>
+      <div class="nextSlider">
+        <span class="entypo-right-dir"></span>
+      </div>
+      <div class="large-12">
+        <div class="slideshow-wrapper">
+          <div class="preloader"></div>
+          <ul data-orbit id="obrasPics">
+            <li>
+              <img class="obrasPics" src="img/slider8.jpg" alt="slide image" >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div id="obras" >
+
+  <div class="panel large-12 columns">
+
+    <div class="large-8 columns">
+      <span class="button" ng-click="query = 'hogar'; scrollTo('otrasObras')"><span class="typicons-home"></span> Hogar</span>
+      <span class="button" ng-click="query = 'comercial'; scrollTo('otrasObras')"><pan class="fontawesome-building"></pan> Comercial</span>
+      <span class="button" ng-click="query = 'industrial'; scrollTo('otrasObras')"><span class="maki-industrial-building"></span> Industrial</span>
+    </div>
+
+    <div class="large-4 columns right">
+      <div class="row collapse">
+        <div class="small-10 columns">
+          <input type="text" placeholder="Buscar" ng-model="query">
+        </div>
+        <div class="small-2 columns">
+          <button ng-click="scrollTo('otrasObras')" class="button prefix"><span class="entypo-search"></span></button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="large-8 columns" ng-show="obrasList.length"> 
+    <div class="row">
+      <div class="large-12 columns panel ">
+        <div class="large-12 columns ">
+          <h4>{{ultimaObra.nombre}}</h4><hr/>
+          <p>{{ultimaObra.descripcion}}</p>
+        </div>
+        <hr>
+        <div class="large-12 columns">
+          <div class="flex-video">
+            <iframe width="420" height="315" src="//www.youtube.com/embed/{{ultimaObra.videoURL}}" frameborder="0" allowfullscreen></iframe>
+          </div>
+
+          <ul id="CLEAR" class="large-block-grid-4 small-block-grid-2" data-clearing>
+            <li ng-repeat="i in ultimaObra.imagenes">
+              <a href="Obras/{{i.imageName}}"><img src="Obras/{{i.imageName}}"></a>
+            </li>
+          </ul>
+
+        </div>
+        <hr>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<center ng-show="!obrasList.length">
+  <h3>No hay obras registradas</h3>
+</center>
+
+<div class="row" ng-show="obrasList.length">
+
+  <div class="large-4 small-12 columns"  >
+
+    <div class="panel">
+      <center><img ng-src="Obras/{{ultimaObra.logo.imageName}}" class="logoObra"></center>
+      <h3>{{ultimaObra.nombre}}</h3>
+      <h5 class="subheader">{{ultimaObra.intro}}</h5>
+    </div>
+
+  </div>
+
+</div>
+
+
+<hr>
+<div class="row " id="otrasObras">
+
+  <div ng-click="verObra(uo)" class="large-3 small-6 columns" ng-repeat="uo in obrasList | filter : query">
+    <center class="prShadow"><img ng-src="Obras/{{uo.logo.imageName}}" /> </center>
+    <h6 class="panel prShadow">{{uo.nombre}}</h6>
+  </div>
+  
+</div>
+
+<script src="../lib/foundation/foundation.clearing.js"></script>

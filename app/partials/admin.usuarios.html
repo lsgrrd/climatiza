@@ -1,0 +1,100 @@
+<div id="agregarUsuario" class="reveal-modal small full-modal">
+	<h2>{{ModeTitle}}</h2>
+	<div class="large-12 columns">
+		<form name="frmUser" id="frmUser" novalidate >
+			<!-- UserName -->
+			<input type="text" placeholder="Usuario"  ng-model="user.username" name="username" name="username" required  unique-username-edit>
+			<small class="error" ng-show=" frmUser.username.$dirty && frmUser.username.$error.required" >El usuario es requerido
+			</small>
+			<small class="error" ng-show=" frmUser.username.$dirty && frmUser.username.$error.uniqueUsernameEdit" >El usuario no esta disponible
+			</small>
+			<!-- *********************************************************************************** -->
+			<!-- password -->
+
+			<input type="password" name="password" id = "password" placeholder="Contraseña" ng-model="user.password"   >
+			
+
+			<input type="email" placeholder="Email" name="email" ng-model="user.email" required unique-email-edit>
+
+
+
+			<small class="error" ng-show=" frmUser.email.$dirty && frmUser.email.$error.required" >El email es requerido
+			</small>
+
+			<small class="error" ng-show=" frmUser.email.$dirty && frmUser.email.$error.email" >El email es incorrecto
+			</small>
+
+			<small class="error" ng-show=" frmUser.email.$dirty && frmUser.email.$error.uniqueEmailEdit" >El email no esta disponible
+			</small>
+
+
+			<!-- info adicional -->
+			<fieldset>
+			  <legend class="black">Información opcional:</legend>
+			  <input type="text" placeholder="Nombre completo" ng-model="user.nombreCompleto">
+			  <input type="tel" placeholder="teléfono" ng-model="user.telefono">
+			  <textarea name="direccion" id="" cols="30" rows="10" placeholder="Direccion" ng-model="user.direccion"></textarea>
+			</fieldset>
+			<!-- *********************************************************************************** -->    
+			<button class="button large-12" ng-click="procesarUsuario(user)"
+			ng-disabled="frmUser.$invalid">{{ModeTitle}}</button>
+			<div data-alert class="alert-box success" id="msgSignUpSuccess" style="display:none;">
+				<!-- Your content goes here -->
+				Usuario registrado exitosamente
+				<a href="#" class="close">&times;</a>
+			</div>
+		</form>
+
+	</div>
+
+	<a class="close-reveal-modal" ng-click="restaurarUsuario(user)">&#215;</a>
+</div>
+
+
+
+<div>
+
+	<div class="row">
+		<div class="large-7 columns">
+			<h3><span class="entypo-users"></span>  Administrar Usuarios</h3>
+		</div>
+		<div class="large-5 columns">
+			
+			<div class="row collapse">
+				<div class="large-8 columns">
+					<input type="text" placeholder="Buscar" ng-model="uQuery">
+				</div>
+				<div class="large-4 columns">
+					<a class="button postfix"><i class="foundicon-search"></i></a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<table class="large-12 responsive" id="usersTable">
+		<tr>
+			<th><h4>Usuario</h4></th>
+			
+			<th><h4>Tel</th>
+			<th><h4>Email</th>
+			<th>
+				<h4><i class="foundicon-tools"></i></h4>
+			</th>
+		</tr>
+		<tr ng-repeat="u in usuarios| filter:uQuery">
+			<th>{{u.username}}</th>
+			
+			<th>{{u.telefono}}</th>
+			<th>{{u.email}}</th>
+			<th>
+				<a ng-click="prepararUsuario('Edit',u)"><i class="foundicon-edit"></i></a>
+				<a ng-click = "eliminarUsuario(u)"><i class="foundicon-trash"></i></a>
+				<a ><i class="foundicon-mail"></i></a>
+			</th>
+		</tr>
+		
+	</table>
+
+	<a href="" class="button" ng-click="prepararUsuario('Insert')"><span class="entypo-user-add"></span>  Agregar Usuario</a>
+
+</div>

@@ -1,0 +1,15 @@
+
+<h3><span class="entypo-mail"></span> Soporte Técnico</h3>
+
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, deleniti, rem nam deserunt architecto commodi fugiat necessitatibus saepe ea eveniet eligendi doloribus natus illo magnam culpa nihil ex ullam praesentium.</p>
+
+<form action="" name="frmContact">
+	<input type="text" placeholder="Asunto" ng-model="msg.asunto" name="asunto" required>
+	<small class="error" ng-show="frmContact.asunto.$dirty && frmContact.asunto.$error.required" >El asunto es requerido
+          </small>
+	<textarea ng-model="msg.body" name="mensaje" required>
+	</textarea>
+	<small class="error" ng-show="frmContact.mensaje.$dirty && frmContact.mensaje.$error.required" >El mensaje es requerido
+          </small>
+	<input type="submit" class="button" ng-click="sendMsg()" value="Enviar" ng-disabled="frmContact.$invalid">
+</form>

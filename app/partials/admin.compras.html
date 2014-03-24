@@ -1,0 +1,107 @@
+<div>
+	<h4>Compras</h4>
+	<div><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea, error, pariatur, repudiandae, tempore praesentium nobis nihil facilis deserunt obcaecati molestiae minus sunt accusamus eius culpa distinctio atque dicta id explicabo.</p></div>
+
+	<hr>
+	<div ng-repeat="com in comprasList">
+		<span class="black">{{com.nombreCompleto}}</span>
+		<br/>
+		<br/>
+		<div ng-show"com.numeroFactura">
+			<span class="black">Factura: {{com.numeroFactura}}</span>
+			<br/>
+			<br/>
+		</div>
+		
+
+		<span class="black">Compra {{$index+1}}</span>
+		<span class="black"> -- {{com.estado}}</span>
+		<span class="right black"><span class="entypo-calendar"></span> Fecha de compra: {{com.Fecha | date:'MM/dd/yyyy'}} </span>
+		<br>
+		<br>
+		<table width="100%">
+			<thead>
+				<tr>
+					<th>Modelo del producto</th>
+					<th>Descripcion</th>
+					<th>Precio unitario</th>
+					<th>Cantidad</th>
+					<th>Proximo Servicio</th>
+					<th>Precio Neto</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="p in com.productos">
+					<td>{{p.Nombre}}</td>
+					<td>{{p.Descripcion}}</td>
+					<td>{{p.Precio | currency}}</td>
+					<td>{{p.cantidad}}</td>
+					<td>{{getServicioDate(com.Fecha,p.servicio)| date:'MM/dd/yyyy'}}</td>
+
+
+					<td>{{p.cantidad*p.Precio | currency}}</td>
+				</tr>
+				
+
+			</tbody>
+		</table>
+		<div class="row">
+			<div class="large-12 columns">
+				
+				<button class="button tiny " ng-show="!com.numeroFactura" 
+				ng-click="agregarNumeroFactura(com)"> <span class="entypo-check"></span> Finalizar</button>
+				<button class="button tiny " ng-show="com.numeroFactura" ng-click="editarNumeroFactura(com)"> <span class="fontawesome-edit"></span> Editar</button>
+				<a class="button tiny " href="/imprimirCotizacion?_id={{com._id}}" target="_blank"><span class="entypo-print"></span> Imprimir</a>
+				<a class="button tiny " ng-click="eliminarCompra(com._id)"><span class="entypo-trash"></span> Eliminar</a>
+				<span class="right black">Total: {{getTotal(com) | currency}}</span>
+			</div>
+		</div>
+		<br><br><hr>
+	</div>		
+	
+
+
+</div>
+
+<div id="addNumFac" class="reveal-modal full-modal small">
+	<form  name="frmCompra" id="" action="">
+		<h3>{{titulo}}</h3>
+		<input type="text" ng-model="numFactura" name="numFactura"   placeholder="Numero de Factura" required>
+		<small class="error" ng-show="checkError('numFactura','required')">El numero de factura es requerido</small>
+
+
+		<div class="row">
+			<div class="large-12 columns">
+				
+				<table width="100%">
+					<thead>
+						<tr>
+							<th>Modelo del producto</th>
+							<th>Descripcion</th>
+							<th>Servicio</th>
+							
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="p in currentCompra.productos">
+							<td>{{p.Nombre}}</td>
+							<td>{{p.Descripcion}}</td>
+							<td><input type="number" max="99" min="0" ng-model="p.servicio" value="{{p.servicio}}"></td>
+						</tr>
+
+
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+
+
+		<button type="submit" ng-disabled="frmCompra.$invalid" ng-show="!isEdit"	ng-click="finalizarCompra(currentCompra._id,numFactura)" ><span class="entypo-floppy"></span> Guardar </button>
+
+
+		<button type="submit" ng-disabled="frmCompra.$invalid" ng-show="isEdit"	ng-click="actualizarNumeroFactura(currentCompra._id,numFactura)"  ><span class="entypo-arrows-ccw" ></span> Actualizar </button>
+
+	</form>
+	<a class="close-reveal-modal">&#215;</a>
+</div>

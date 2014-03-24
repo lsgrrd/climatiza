@@ -1,0 +1,54 @@
+<div>
+	<h3><span class="fontawesome-list"></span>  Administrar Categorias</h3>
+
+	<table class="large-12 responsive" id="productsTable">
+		<tr>
+			<th><h4>Nombre</h4></th>
+			<th ><h4>Descripcion</h4></th>
+			<th ><h4>Productos</h4></th>
+			<th><h4><i class="foundicon-tools"></h4></th>
+		</tr>
+		<tr ng-repeat="cat in categoriasList">
+			<th>{{cat.nombre}}</th>
+			<th>{{cat.descripcion}}</th>
+			<th>{{cat.productos}}</th>
+			<th>
+				<a href="" ng-click="editarCategoria(cat)"><i class="foundicon-edit"></i></a>
+				<a href=""><i class="foundicon-trash" ng-click="eliminarCategoria(cat._id)"></i></a>
+			</th>
+		</tr>
+		
+	</table>
+	
+	<a href="" class="button" ng-click="insertarCategoria(cat)">Agregar categoria</a>
+
+</div>
+
+<div class="reveal-modal small full-modal" id="mdlCategoriaFrm">
+	
+	<form  novalidate name="frmCategoria">
+		<fieldset>
+			<legend><h4>Agregar Categoria</h4></legend>
+
+
+			<label for="">Nombre:</label>
+			<input type="text" name="nombre" placeholder="Nombre" ng-model="categoria.nombre" required>
+			<small class="error" ng-show="checkError('nombre','required')">El nombre es requerido</small>
+			<label for="">Descripción:</label>
+			<textarea name="descripcion" id="" cols="30" rows="10" placeholder="Descripcion" ng-model="categoria.descripcion" required ng-minlength="10" ng-maxlength="200" ></textarea>
+			<small class="error" ng-show="checkError('descripcion','required')">La descripción es requerida</small>
+			<small class="error" ng-show="checkError('descripcion','minlength')" >La descripción debe tener por lo menos 10 caracteres
+			</small>
+
+			<small class="error" ng-show="checkError('descripcion','maxlength')" >La descripción debe no puede exceder los 200
+			</small>
+
+
+
+		</fieldset>
+
+		<a href="" class="button" ng-click="procesarCategoria(categoria)" ng-disabled="frmCategoria.$invalid">Guardar</a>
+
+		<a class="close-reveal-modal">&#215;</a>
+	</form>
+</div>

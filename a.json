@@ -1,0 +1,12 @@
+{
+  "name": "Climatiza BLOB",
+  "version": "0.0.1",
+  "description": "Climatiza",
+  "dependencies": {
+  	"express": "*",
+	"password-hash":"*",
+	"mongo":"*"
+
+   },
+  "engine": "node >=0.6.x"
+}

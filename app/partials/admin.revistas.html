@@ -1,0 +1,133 @@
+<div class="row">
+  <div class="large-12 columns">
+    <h3><span class="entypo-book-open"></span>  Revistas</h3>   
+  </div>
+</div>
+
+<table width="100%">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Mes</th>
+      
+      <th>Número de Paginas </th>
+      <th><i class="foundicon-tools"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="rev in revistasList">
+      <td>{{rev.nombre}}</td>
+      <td>{{ mesNombre[rev.mes] }}</td>
+      
+      <td>{{rev.paginas.length}}</td>
+      <td>
+        <span class="entypo-doc-text" ng-click="agregarImagen(rev._id)"></span>
+        <i class="foundicon-trash" ng-click="eliminarRevista(rev._id)"></i>
+        <i class="fontawesome-star" ng-click="verPaginas(rev)" ng-show="rev.paginas.length>0"></i>
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+
+<div class="row">
+  <div class="large-12 columns">
+    <button class="right button small" ng-click="ingresarRevista()">Agregar revista</button>
+  </div>
+</div>
+
+
+<div id="indicesModal" class="reveal-modal medium full-modal">
+
+    <h2>Asignar Indice</h2>
+    <div class="large-9 columns large-offset-3">
+      <ul >
+        <li ><img id="indexImage" ng-src="{{indiceImageSrc}}"></li> 
+      </ul>
+    </div>
+
+    <div class="addMagFix" id="indiceControls">
+      <ul class="button-group round even-2">
+        <li ng-show="currentRev.paginas.length>1"><button class="button" ng-click="nextImage()"><class class="fontawesome-arrow-left"></class></button></li>
+        <li ng-show="currentRev.paginas.length>1"><button  class="button" ng-click="previousImage()"><class class="fontawesome-arrow-right"></class></button></li>
+      </ul>
+
+      <input type="text" placeholder="indice" ng-model="currPaginaIndex" >
+      <button class="button  large-12" ng-click="assignarIndice()">Asignar  Indice</button>
+
+      <button ng-click="confirmDeleteImage()" ng-show="!confirmDeleteImageFlag">Eliminar página</button>
+      
+      
+  
+      <div class="large-12 columns" ng-show="confirmDeleteImageFlag">
+      <p>Esta seguro que desea eliminar la imagen?</p>
+      <button class="small-6 columns success small" ng-click="deletePagina()">Si</button>
+      <button class="small-6 columns alert small" ng-click="confirmDeleteImageFlag=!confirmDeleteImageFlag">No</button> 
+
+    </div>  
+
+      <span  id="indiceMessage" class="black">{{indiceMessage}}</span>
+    </div>
+
+    <a class="close-reveal-modal" >&#215;</a>
+  </div>
+
+<div id="revistaModal" class="reveal-modal small full-modal">
+  <form action="" name="frmRevista" id="frmRevista">
+    <h3>Agregar Revista</h3>
+    <input type="text" placeholder="Nombre" required ng-model="revista.nombre" name="nombre">
+    
+    <small class="error" ng-show="checkError('nombre','required')">El nombre es requerido</small>
+
+
+    <!-- <input type="text" placeholder="Numero de Paginas" required ng-model="revista.paginasTotal" name="paginasTotal" ui-validate="{integer:'isInt($value)'}" ui-watch="paginasTotal">
+    
+    <small class="error" ng-show="checkError('paginasTotal','integer')">Las paginas deben de ser un numero entero</small> -->
+
+    <select ng-model='revista.mes' required>
+      <option value="0">Ene</option>
+      <option value="1">Feb</option>
+      <option value="2">Mar</option>
+      <option value="3">Abr</option>
+      <option value="4">May</option>
+      <option value="5">Jun</option>
+      <option value="6">Jul</option>
+      <option value="7">Ago</option>
+      <option value="8">Sep</option>
+      <option value="9">Oct</option>
+      <option value="10">Nov</option>
+      <option value="11">Dic</option>
+    </select>
+    
+    <button ng-disabled="frmRevista.$invalid" ng-click="agregarRevista(revista)">{{mode}} revista</button>
+  </form>
+  <a class="close-reveal-modal" ng-click="revista={};frmRevista.$setPristine();">&#215;</a>
+</div>
+
+<div id="revImgUpload" class="reveal-modal small full-modal">
+
+  <h2>Agregar Páginas de la revista</h2>
+
+  <form id="frmImageUpload" class="upload" method="post" action="agregarImagen" enctype="multipart/form-data">
+
+    <div id="revistaDrop" class="drop panel">
+      <h4>Arrastrar Imagen(es)</h4>
+
+      <a class="button">Buscar</a>
+      <input type="file" name="upl" multiple />
+    </div>
+
+    <ul>
+
+    </ul>
+
+  </form>
+
+  <a class="close-reveal-modal" >&#215;</a>
+
+
+
+
+  
+
+</div>

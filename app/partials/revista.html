@@ -1,0 +1,136 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Revista Climatiza</title>
+	<link rel="stylesheet" type="text/css" href="../css/revista.css">
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="../lib/turn.min.js"></script>
+	<script type="text/javascript" src="../lib/jquery.zoomooz.min.js"></script>
+	
+</head>
+<body>
+	<div class="container1">
+		<a href="http://monoestereo.homelinux.com">
+			
+			<img class="hide-for-medium-down" id="logoRev" src="../img/mainLogoBW.png" >
+		</a>
+
+		<span class="revElec"><span class="entypo-book-open"></span>  Revista Electronica</span>
+
+	</div>
+	<div >
+
+		<div id="magCont" >
+			<div class="prevSlider">
+				<span class="entypo-left-open-big"></span>
+			</div>
+			<div class="nextSlider">
+				<span class="entypo-right-open-big"></span>
+			</div>
+			<div id="magazine" >
+
+				
+
+				<%
+				data.revista.paginas.sort(function(a,b) { 
+
+					return parseFloat(a.indice) - parseFloat(b.indice) 
+
+				});
+				for( var i = 0; i < data.revista.paginas.length; i++){ %>
+				<div style="background-image:url(Revistas/<%=data.revista.paginas[i].imageName%>);"></div>
+				<%}%>
+
+
+			<!-- 	<div style="background-image:url(pages/01.jpeg);"></div>
+				<div style="background-image:url(pages/02.jpeg);"></div>
+				<div style="background-image:url(pages/03.jpeg);"></div>
+				<div style="background-image:url(pages/04.jpeg);"></div>
+				<div style="background-image:url(pages/05.jpeg);"></div>
+				<div style="background-image:url(pages/06.jpeg);"></div>
+				<div style="background-image:url(pages/07.jpeg);"></div>
+				<div style="background-image:url(pages/08.jpeg);"></div>
+				<div style="background-image:url(pages/09.jpeg);"></div>
+				<div style="background-image:url(pages/10.jpeg);"></div>
+				<div style="background-image:url(pages/11.jpeg);"></div>
+				<div style="background-image:url(pages/12.jpeg);"></div>
+				<div style="background-image:url(pages/13.jpeg);"></div>
+				<div style="background-image:url(pages/14.jpeg);"></div>
+				<div style="background-image:url(pages/15.jpeg);"></div>
+				<div style="background-image:url(pages/16.jpeg);"></div> -->
+			</div>
+		</div>
+		
+	</div>
+
+	<div class="prevMags">
+		<div class="container">
+
+
+			<%
+			var x = 1;
+			for( var i = 0; i < data.otras.length; i++){ %>
+			<div class="preMag">
+
+				<a href='/revista?_id=<%=data.otras[i].Id_Rev%>'><img src="./Revistas/<%=data.otras[i].imageName%>" alt="Imagen No disponible" class="imgPreMag"/></a>
+
+				<div class="preMagInfo">
+
+					<div><%=data.mesNombre[parseInt(data.otras[i].mes+"")]%> 2013</div>
+					<div><%=data.otras[i].nombre%></div>
+				</div>
+			</div>
+			<%}%>
+
+		</div>
+	</div>
+
+	<script type="text/javascript">
+
+	$(window).ready(function() {
+		$('#magazine').turn({
+			display: 'double',
+			acceleration: true,
+			gradients: !$.isTouch,
+			elevation:50,
+			when: {
+				turned: function(e, page) {
+					/*console.log('Current view: ', $(this).turn('view'));*/
+				}
+			}
+		});
+
+
+		$(".nextSlider").click(function(){
+			$('#magazine').turn('next');
+		});
+
+		$(".prevSlider").click(function(){
+			$('#magazine').turn('previous');
+		});
+
+
+	});
+
+
+	$(window).bind('keydown', function(e){
+
+		if (e.keyCode==37)
+			$('#magazine').turn('previous');
+		else if (e.keyCode==39)
+			$('#magazine').turn('next');
+
+	});
+
+
+
+	</script>
+	
+</body>
+</html>
+
+
+
+

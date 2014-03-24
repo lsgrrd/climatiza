@@ -1,0 +1,203 @@
+<div class="row">
+	<div class="large-7 columns">
+		<h3><span class="fontawesome-th"></span>  Administrar Productos</h3>
+	</div>
+	<div class="large-5 columns">
+
+		<div class="row collapse">
+			<div class="large-8 columns">
+				<input type="text" placeholder="Buscar" ng-model="pQuery">
+			</div>
+			<div class="large-4 columns">
+				<a class="button postfix"><i class="foundicon-search"></i></a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<table class="large-12 responsive" id="productsTable">
+		<tr>
+			<th><h4>Modelo</h4></th>
+			<th><h4>Precio</h4></th>
+			<th><h4>Categoria</h4></th>
+			<th><h4><i class="foundicon-tools"></h4></th>
+		</tr>
+		<tr ng-repeat="p in productosList | filter:pQuery">
+			<th>{{p.Nombre}}</th>
+			<th>{{p.Precio | currency}}</th>
+			<th>{{p.NombreCategoria}}</th>
+			<th>
+				<a href="" ng-click="procesarProducto('Edit',p)"><i class="foundicon-edit"></i></a>
+				<a href="" ng-click="agregarImagen(p.Id_Producto)"><i class="foundicon-photo"></i></a>
+				<a href="" ng-click="agregarFichaTecnica(p.Id_Producto)"><i class="foundicon-paper-clip"></i></a>
+				<a href="" ng-click="cropImagenes(p)" ng-show="!!p.imagenes.length "><span class="entypo-popup black"></span></a>
+				<a href="" ng-click="eliminarProducto(p)"><i class="foundicon-trash"></i></a>
+			</th>
+		</tr>
+
+	</table>
+
+
+</div>
+<a href="" class="button"  ng-click="procesarProducto('Insert')"><i class="foundicon-inbox"></i> Agregar Producto</a>
+
+<div class="revealContainer">
+	<div id="agregarProducto" class="reveal-modal small full-modal">
+		<h2>{{ProductTitle}}</h2>
+		<div class="large-12 columns">
+			<form novalidate name="frmProducto" id="frmProducto" > 
+				<div class="row">
+					<div class="large-12 columns">
+
+
+						<label for="">Categoria:</label>
+						<select name="IdCategoria" ng-model="producto.IdCategoria" ng-options="c._id as c.nombre for c in categoriasList"required>
+							<!-- <option value="" selected>Seleccione una categoria</option>
+							<option ng-repeat="c in categoriasList" value="{{c._id}}">{{c.nombre}}</option> -->
+
+						</select>
+
+						<small class="error" ng-show="checkError('IdCategoria','required')" >Seleccione una categoria
+						</small>
+						<label>Modelo:</label>
+						<input type="text" placeholder="Nombre del Producto" ng-model="producto.Nombre" name="Nombre" required >
+						<small class="error" ng-show="checkError('Nombre','required')" >El modelo es requerido
+						</small>
+					</div>
+				</div>
+				<div class="row">
+					<div class="large-12 columns">
+						<label>Descripción:</label>
+						<textarea rowstype="text" placeholder="Descripción del Producto"  ng-model="producto.Descripcion" required ng-minlength="5" ng-maxlength="300" name="Descripcion"></textarea>
+						<small class="error" ng-show="checkError('Descripcion','required')" >La descripción es requerida
+						</small>
+
+						<small class="error" ng-show="checkError('Descripcion','minlength')" >La descripción debe tener 5 caracteres
+						</small>
+
+						<small class="error" ng-show="checkError('Descripcion','maxlength')" >La descripción no puede exceder los 50 caracteres
+						</small>
+
+					</div>
+				</div>
+
+				<div class="row collapse">
+					<label>Precio:</label>
+					<div class="large-1 columns">
+						<span class="prefix ">$</span>
+					</div>
+					<div class="large-11 columns">
+						<input type="number" min="1" placeholder="Precio" name="Precio" ng-model="producto.Precio" required ng-pattern="/^[+-]?[0-9]{1,3}(?:[0-9]*(?:[.,][0-9]{2})?|(?:,[0-9]{3})*(?:\.[0-9]{2})?|(?:\.[0-9]{3})*(?:,[0-9]{2})?)$/">
+					</div>
+					
+					<small class="error" ng-show="checkError('Precio','pattern')" >El precio es incorrecto
+					</small>
+				</div>
+
+				<button type="submit" href="" ng-click="finalizarProducto(producto,ProductMode)" ng-disabled="frmProducto.$invalid">Siguiente</button>
+			</form>
+
+		</div>
+
+		<a class="close-reveal-modal" ng-click="restaurar()">&#215;</a>
+	</div>
+
+
+
+
+
+
+
+	<div id="imgUpLoad" class="reveal-modal small full-modal">
+
+		<h2>Agregar Imagenes</h2>
+
+		<form id="upload" class="upload" method="post" action="upload" enctype="multipart/form-data">
+			<div id="drop" class="panel drop">
+				<h4>Arrastrar Imagen(es)</h4>
+
+				<a class="button">Buscar</a>
+				<input type="file" name="upl" multiple />
+			</div>
+
+			<ul>
+
+			</ul>
+
+		</form>
+
+		<a class="close-reveal-modal" >&#215;</a>
+	</div>
+
+
+
+	<div id="fichaUpload" class="reveal-modal small full-modal">
+
+		<h2>Agregar Ficha Tecnica</h2>
+
+		<form id="frmFichaUpload" class="upload" method="post" action="agregarFichaTecnica" enctype="multipart/form-data">
+			<div id="fichaDrop" class="drop panel">
+				<h4>Arrastrar Imagen(es)</h4>
+
+				<a class="button">Buscar</a>
+				<input type="file" name="upl" multiple />
+			</div>
+
+
+			<ul>
+
+			</ul>
+
+		</form>
+
+		<a class="close-reveal-modal" >&#215;</a>
+	</div>
+
+
+
+
+
+
+
+
+
+	<div id="crop" class="reveal-modal medium full-modal">
+
+		<h2>Recortar Imágenes</h2>
+		<div class="large-9 columns ">
+			<ul >
+				<li ><img id="croppable" ng-src="{{cropImageSrc}}"></li> 
+			</ul>
+		</div>
+
+		<div class="large-3 columns" id="cropControls">
+			<canvas id="preview" style="width:150px;height:150px;overflow:hidden;"></canvas>
+			<div class="columns large-12">
+
+				<ul class="button-group round even-2">
+					<li ng-show="currentProduct.imagenes.length>1"><button class="button " ng-click="nextImage()"><class class="fontawesome-arrow-left"></class></button></li>
+					<li ng-show="currentProduct.imagenes.length>1"><button  class="button " ng-click="previousImage()"><class class="fontawesome-arrow-right"></class></button></li>
+				</ul>
+			
+				<button ng-click="saveCrop()">Guardar Thumbnail</button>
+				<button ng-click="confirmDeleteImage()" ng-show="!confirmDeleteImageFlag">Eliminar Imagen</button>
+			</div>
+			<div class="large-12 columns" ng-show="confirmDeleteImageFlag">
+				<p>Esta seguro que desea eliminar la imagen?</p>
+				<button class="small-6 columns success small" ng-click="deleteImage()">Si</button>
+				<button class="small-6 columns alert small" ng-click="confirmDeleteImageFlag=!confirmDeleteImageFlag">No</button> 
+
+			</div>	
+
+
+		</div>
+
+		<a class="close-reveal-modal" >&#215;</a>
+	</div>
+
+
+</div>
+
+
+

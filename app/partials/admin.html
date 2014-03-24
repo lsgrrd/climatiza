@@ -1,0 +1,55 @@
+<div  class="hideX">
+	<div id="title"><h2>Administrador</h2></div>
+	<div id="section1Cont" >
+
+		<div id="especialidadesOrbit" class="shadow">
+			<div class="prevSlider">
+			  <span class="entypo-left-dir"></span>
+			</div>
+			<div class="nextSlider">
+			  <span class="entypo-right-dir"></span>
+			</div>
+			<div class="large-12">
+				<div class="slideshow-wrapper">
+					<div class="preloader"></div>
+					<ul data-orbit>
+						<li>
+							<img src="img/slider3.jpg" alt="slide image" >         
+						</li>
+						<li>
+							<img src="img/slider5.jpg" alt="slide image" >
+						</li>
+						<li>
+							<img src="img/slider9.jpg" alt="slide image" >
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<br>
+<div class="large-3 columns panel">
+	<div class="button large-12 btnMenu"  ng-click="setState('inicio')">Inicio</div>
+	<div class="button large-12 btnMenu"  ng-click="setState('categorias')">Categorias</div>
+	<div class="button large-12 btnMenu"  ng-click="setState('productos')" >Productos</div>
+	<div class="button large-12 btnMenu"  ng-click="setState('usuarios')">Usuarios</div>
+	<div class="button large-12 btnMenu"  ng-click="setState('obras')">Obras</div>
+	<div class="button large-12 btnMenu"  ng-click="setState('especialidades')">Especialidades</div>
+	<div class="button large-12 btnMenu"  ng-click="setState('revistas')">Revistas</div>
+	<div class="button large-12 btnMenu"  ng-click="setState('cotizaciones')">Cotizaciones</div>
+	<div class="button large-12 btnMenu"  ng-click="setState('compras')">Compras</div>
+
+</div>
+<div class="large-9 columns" id="pnlAdmin">
+	<div class="panel">
+		<div ui-view >
+
+		</div>
+	</div>
+</div>
+
+
+

@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width" />
+
+  <title>Climatiza</title>
+
+  <link rel="stylesheet" href="css/foundation.css" />
+  <link rel="stylesheet" href="css/general_foundicons.css" />
+  <link type="text/css" media="screen" rel="stylesheet" href="css/responsive-tables.css" />
+  <link  href="css/style.css" rel="stylesheet"/>
+  
+  <link rel="stylesheet" href="css/jquery.Jcrop.min.css" />
+  <link href="lib/upload_assets/css/style.css" rel="stylesheet" />
+
+
+
+  <script src="lib/vendor/custom.modernizr.js"></script>
+
+
+</head>
+<body>
+
+  <!-- 
+  88888b.d88b.   .d88b.  88888b.  888  888 
+  888 "888 "88b d8P  Y8b 888 "88b 888  888 
+  888  888  888 88888888 888  888 888  888 
+  888  888  888 Y8b.     888  888 Y88b 888 
+  888  888  888  "Y8888  888  888  "Y88888  
+-->
+
+
+<section id="menu" class="shadow" ng-controller="menuCtrl">
+
+
+  <div class="large-12">
+    <div class="row">
+      <img class="hide-for-medium-down" id="logoB" src="img/mainLogoBW.png">
+    </div>
+
+    <div id="mainLogoCont" class="left show-for-medium-down">
+      <img id="mainLogo" src="img/mainLogoBW.png">
+    </div>
+
+
+    <!-- Menu Normal -->
+
+    <ul class="button-group right hide-for-small">
+      <li><a class="button menuItem" href="#/inicio">Inicio</a></li>
+      <li><a class="button menuItem" href="#/empresa">Empresa</a></li>
+      <li><a class="button menuItem" href="#/obras" >Obras</a></li>
+      <li><a class="button menuItem" href="#/especialidades">Especialidades</a></li>
+      <li><a class="button menuItem" href="#/catalogo">Catálogo</a></li>
+      <li>
+        <a href="" data-dropdown="drop3" class="button dropdown menuItem">Atención a Clientes</a>
+        <ul id="drop3" class="f-dropdown dropContent" data-dropdown-content>
+          <li ng-show="!currentUser.isLoggedIn"><a class="menuItemDrop" data-reveal-id="logIn">Iniciar Sesión <span class="entypo-login right"></span></i></a></li>
+
+          <li ng-show="currentUser.isLoggedIn" ng-click="logOut()"><a class="menuItemDrop" >Cerrar Sesión <i class="foundicon-checkmark right" ></i></a></li>
+
+          <li  ng-show="!currentUser.isLoggedIn"><a class="menuItemDrop" data-reveal-id="singUp">Registrar <i class="foundicon-plus right"></i></a></li>
+          <li  ng-show="currentUser.isLoggedIn"><a class="menuItemDrop" href="#/users/soporte">Mi Portal <i class="foundicon-website right"></i></a></li>
+          <li  ng-show="isAdmin()" ><a class="menuItemDrop" href="#/admin/inicio">Administrador <i class="foundicon-settings right"></i></a></li>
+        </ul>
+
+      </li>
+    </ul>
+
+    <!-- Menu Minimizado -->
+
+    <div class="right hide-for-medium-up">
+      <a href="#" data-dropdown="drop1" class="button dropdown">Menu</a>
+      <ul id="drop1" class="f-dropdown dropContent">
+        <br>
+        <li><a class="button menuItem" href="#/inicio">Inicio</a></li>
+        <li><a class="button menuItem" href="#/empresa">Empresa</a></li>
+        <li><a class="button menuItem" href="#/obras">Obras</a></li>
+        <li><a class="button menuItem" href="#/especialidades">Especialidades</a></li>
+        <li><a class="button menuItem" href="#/catalogo">Catálogo</a></li>
+        <li><a href="#/users/soporte" data-dropdown="drop2" class="button dropdown menuItem">Atención a Clientes</a>
+          <ul id="drop2" class="f-dropdown" data-dropdown-content>
+            <!-- <li><a class="menuItemDrop" data-reveal-id="logIn">Iniciar Sesión <i class="foundicon-checkmark right"></i></a></li>
+            <li><a class="menuItemDrop" data-reveal-id="singUp">Registrar <i class="foundicon-plus right"></i></a></li>
+            <li><a class="menuItemDrop" href="#/miPortal">Mi Portal <i class="foundicon-website right"></i></a></li>
+            <li><a class="menuItemDrop" href="#/admin">Administrador <i class="foundicon-settings right"></i></a></li> -->
+            <li ng-show="!currentUser.isLoggedIn"><a class="menuItemDrop" data-reveal-id="logIn">Iniciar Sesión <span class="entypo-login right"></span></i></a></li>
+
+            <li ng-show="currentUser.isLoggedIn" ng-click="logOut()"><a class="menuItemDrop" >Cerrar Sesión <i class="foundicon-checkmark right" ></i></a></li>
+
+            <li  ng-show="!currentUser.isLoggedIn"><a class="menuItemDrop" data-reveal-id="singUp">Registrar <i class="foundicon-plus right"></i></a></li>
+            <li  ng-show="currentUser.isLoggedIn"><a class="menuItemDrop" href="#/users">Mi Portal <i class="foundicon-website right"></i></a></li>
+            <li  ng-show="isAdmin()" ><a class="menuItemDrop" href="#/admin/inicio">Administrador <i class="foundicon-settings right"></i></a></li>
+
+            
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+  
+</section>
+
+<div id="contactoSide" data-reveal-id="contactoModal" class="hide-for-medium-down">
+  <h5> 
+    <br>
+    <center><span>C</span></center> 
+    <center><span>O</span></center> 
+    <center><span>N</span></center>
+    <center><span>T</span></center>
+    <center><span>A</span></center>
+    <center><span>C</span></center>
+    <center><span>T</span></center>
+    <center><span>O</span></center>
+    <br>
+    <center><span><i class="foundicon-phone"></i></span></center>
+    <center><span><i class="foundicon-mail"></i></span></center>
+    <center><span><i class="foundicon-location"></i></span></center> 
+    <br>
+  </h5>  
+</div>
+
+<div id="revistaSide" class="hide-for-small">
+  <a href="/revista" target="_blank">
+    <h5> 
+      <div  class="hide-for-medium-down">
+
+        <center><span>R</span></center> 
+        <center><span>E</span></center> 
+        <center><span>V</span></center>
+        <center><span>I</span></center>
+        <center><span>S</span></center>
+        <center><span>T</span></center>
+        <center><span>A</span></center>
+        <br>
+        <center><span>E</span></center>
+        <center><span>L</span></center>
+        <center><span>E</span></center>
+        <center><span>C</span></center>
+        <center><span>T</span></center>
+        <center><span>R</span></center>
+        <center><span>O</span></center>
+        <center><span>N</span></center>
+        <center><span>I</span></center>
+        <center><span>C</span></center>
+        <center><span>A</span></center>
+        <br>
+      </div>
+      <center><span class="entypo-book-open"></span></center>  
+    </h5>
+  </a>
+</div>
+
+
+<!-- 
+8b    d8  dP"Yb  8888b.     db    88     .dP"Y8 
+88b  d88 dP   Yb  8I  Yb   dPYb   88     `Ybo." 
+88YbdP88 Yb   dP  8I  dY  dP__Yb  88  .o o.`Y8b 
+88 YY 88  YbodP  8888Y"  dP""""Yb 88ood8 8bodP' 
+-->
+
+
+
+<div id="logIn" class="reveal-modal small">
+  <h4><span class="entypo-login"></span>  Iniciar Sesión</h4>
+  <form name="frmLogin" id="frmLogin"  ng-controller="LoginCtrl">
+    <input type="text" placeholder="Usuario" ng-model="user.username" required>
+    <input type="password" placeholder="Contraseña" ng-model="user.password" required>
+    <button class="button large-12" ng-click="userLogin(user,frmLogin)"
+    ng-disabled="frmLogin.$invalid || isUnchanged(user)"
+    >Iniciar Sesión</button>
+    <small class="error" ng-show="loginFailed" >El usuario o la contrase;a son incorrectos
+    </small>
+  </form>
+  <a class="close-reveal-modal" >&#215;</a>
+</div>
+
+
+<div id="singUp" class="reveal-modal small">
+  <h4><span class="entypo-user-add"></span> Registrar</h4>
+  <form name="frmSignUp" id="frmSignUp" novalidate ng-controller="signUpCtrl">
+    <!-- UserName -->
+    <input type="text" placeholder="Usuario"  ng-model="user.username" name="username" name="username" required  unique-username>
+    <small class="error" ng-show=" frmSignUp.username.$dirty && frmSignUp.username.$error.required" >El usuario es requerido
+    </small>
+    <small class="error" ng-show=" frmSignUp.username.$dirty && frmSignUp.username.$error.uniqueUsername" >El usuario no esta disponible
+    </small>
+    <!-- *********************************************************************************** -->
+    <!-- password -->
+
+    <input type="password" name="password" id = "password" placeholder="Contraseña" ng-model="user.password"   required>
+    <small class="error" ng-show=" frmSignUp.passowrd.$dirty && frmSignUp.passowrd.$error.required" >La contraseña es requerida
+    </small>
+
+    <!-- *********************************************************************************** -->    
+
+    <!-- password repeat-->
+
+    <input type="password" name="password2" placeholder="Repetir contraseña" ng-model="user.password2"   required pw-match="password">
+    <small class="error" ng-show=" frmSignUp.password2.$dirty.required && frmSignUp.password2.$error.required" >La contraseña es requerida
+    </small>
+
+    <small class="error" ng-show=" frmSignUp.password2.$dirty && frmSignUp.password2.$error.pwMatch" >Las contraseñas no son iguales
+    </small>
+  
+
+
+
+
+    <input type="text" placeholder="Nombre completo" ng-model="user.nombreCompleto" name="nombreCompleto" required>
+  
+  <small class="error" ng-show=" frmSignUp.nombreCompleto.$dirty && frmSignUp.nombreCompleto.$error.required" >El nombre completo es requerido
+    </small>
+
+
+    <!-- *********************************************************************************** -->
+    <!-- email -->
+    <input type="email" placeholder="Email" name="email" ng-model="user.email" required unique-email>
+    
+
+
+    <small class="error" ng-show=" frmSignUp.email.$dirty && frmSignUp.email.$error.required" >El email es requerido
+    </small>
+
+    <small class="error" ng-show=" frmSignUp.email.$dirty && frmSignUp.email.$error.email" >El email es incorrecto
+    </small>
+    
+    <small class="error" ng-show=" frmSignUp.email.$dirty && frmSignUp.email.$error.uniqueEmail" >El email no esta disponible
+    </small>
+
+    <!-- info adicional -->
+    <fieldset>
+      <legend>Información opcional:</legend>
+      
+      <input type="tel" placeholder="teléfono" ng-model="user.telefono">
+      <textarea name="direccion" id="" cols="30" rows="10" placeholder="Direccion" ng-model="user.direccion"></textarea>
+    </fieldset>
+    
+
+
+    
+    <!-- *********************************************************************************** -->    
+    <button class="button large-12" ng-click="userSignUp(user,frmSignUp)"
+    ng-disabled="frmSignUp.$invalid">Registrar</button>
+    <div data-alert class="alert-box success" id="msgSignUpSuccess" style="display:none;">
+      <!-- Your content goes here -->
+      Usuario registrado exitosamente
+      <a href="#" class="close">&times;</a>
+    </div>
+  </form>
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+
+
+<div id="contactoModal" class="reveal-modal medium" ng-controller="contactCtrl" >
+  <div class="large-12 columns">
+    <h3><i class="foundicon-mail"></i> Email</h3>
+    <form name="frmContact" id="frmContact">
+      <div class="row collapse">
+        <div class="large-1 columns">
+          <label class=" inline">Nombre: </label>
+        </div>
+        <div class="large-11 columns">
+          <input type="text" name="nombre" placeholder="Nombre completo" required ng-model="msg.nombre">
+
+          <small class="error" ng-show="frmContact.nombre.$dirty && frmContact.nombre.$error.required" >El nombre es requerido
+          </small>
+        </div>
+      </div>
+      <div class="row collapse">
+        <div class="large-1 columns">
+          <label class=" inline">Email: </label>
+        </div>
+        <div class="large-11 columns">
+          <input type="email" name="userEmail" placeholder="nombre@mail.com" required ng-model="msg.email">
+           <small class="error" ng-show="frmContact.userEmail.$dirty && frmContact.userEmail.$error.email" >El email es incorrecto
+          </small>
+        </div>
+      </div>
+      <label>Mensaje:</label>
+      <textarea type="text" rows="4" required ng-model="msg.body" name="mensaje"></textarea>
+
+       <small class="error" ng-show="frmContact.mensaje.$dirty && frmContact.mensaje.$error.required" >El mensaje es requerido
+          </small>
+      <button type="submit" class="radius button" ng-click="sendMsg()" ng-disabled="frmContact.$invalid">Enviar</button>
+    </form>
+  </div>
+  <div class="large-12 columns">
+    <div class="large-6 columns">
+      <h3><i class="foundicon-location"></i> Dirección</h3>
+      <p>Av. del Valle 1218, Col del Valle C.P. 87025</p>
+      <p>Cd. Victoria Tamaulipas</p>
+    </div>
+    <div class="large-6 columns">
+      <h3><i class="foundicon-phone"></i> Teléfono</h3>
+      <p>Tel. (834) 314-6985</p>
+    </div>
+    <hr>
+  </div>
+  <div class="row">
+    <div class="large-12 columns">
+
+      <iframe class="shadow" width="100%" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?q=ciudad+victoria+tamaulipas+Av.+del+Valle+1218,+Col+del+Valle+C.P.+87025&amp;sll=23.761233,-99.135465&amp;hl=en&amp;ie=UTF8&amp;hq=&amp;hnear=Del+Valle+1218,+Del+Valle,+Ciudad+Victoria,+Tamaulipas,+Mexico&amp;t=m&amp;z=16&amp;iwloc=A&amp;output=embed">
+      </iframe><br/>
+      <small>
+        <a href="http://maps.google.com/maps?q=ciudad+victoria+tamaulipas+Av.+del+Valle+1218,+Col+del+Valle+C.P.+87025&amp;sll=23.761233,-99.135465&amp;hl=en&amp;ie=UTF8&amp;hq=&amp;hnear=Del+Valle+1218,+Del+Valle,+Ciudad+Victoria,+Tamaulipas,+Mexico&amp;t=m&amp;z=16&amp;iwloc=A&amp;source=embed" style="color:#0000FF;text-align:left">View Larger Map</a>
+      </small> 
+    </div>
+  </div>
+  <a class="entypo-cancel reveal-close-icon" ng-click="closeContactForm()"></a>
+</div>
+
+
+<div id="dlgMessages" class="reveal-modal small">
+  <section>Usuario </section>
+  <a class="close-reveal-modal" >&#215;</a>
+</div>
+
+
+
+
+<!-- 
+                           888    d8b                    d888   
+                           888    Y8P                   d8888   
+                           888                            888   
+.d8888b   .d88b.   .d8888b 888888 888  .d88b.  88888b.    888   
+88K      d8P  Y8b d88P"    888    888 d88""88b 888 "88b   888   
+"Y8888b. 88888888 888      888    888 888  888 888  888   888   
+     X88 Y8b.     Y88b.    Y88b.  888 Y88..88P 888  888   888   
+ 88888P'  "Y8888   "Y8888P  "Y888 888  "Y88P"  888  888 8888888 
+-->
+<section id="section1" class="story" data-speed="8" data-type="background">
+  <div class="row">
+    <div class="large-12">
+      <img class="hide-for-medium-down" id="menuLogo" src="img/menuLogo.png">
+
+    </div>
+  </div>  
+  <br>
+  <div class="row relativeX">
+    <div id="ribbon" class="hide-for-small"></div>
+    <div class="" >
+      <div id="section1Load">
+
+      </div>  
+    </div>
+  </div>
+</section>
+
+
+  <!-- 
+           888            d8b          
+           888            Y8P          
+           888                         
+  .d8888b  888888 888d888 888 88888b.  
+  88K      888    888P"   888 888 "88b 
+  "Y8888b. 888    888     888 888  888 
+       X88 Y88b.  888     888 888 d88P 
+   88888P'  "Y888 888     888 88888P"  
+                              888      
+                              888      
+  .                           888      
+-->
+<section id="strip" class="shadow relativeX">
+  <div class="row"> 
+    <div class="large-12 columns">
+      contáctanos <strong>(834) 314 69 85</strong> ó <strong>ventas@climatizacionespecializada.com</srtong>
+    </div>
+  </div>
+</section>
+
+
+  <!-- 
+                             888    d8b                    .d8888b.  
+                             888    Y8P                   d88P  Y88b 
+                             888                                 888 
+  .d8888b   .d88b.   .d8888b 888888 888  .d88b.  88888b.       .d88P 
+  88K      d8P  Y8b d88P"    888    888 d88""88b 888 "88b  .od888P"  
+  "Y8888b. 88888888 888      888    888 888  888 888  888 d88P"      
+       X88 Y8b.     Y88b.    Y88b.  888 Y88..88P 888  888 888"       
+   88888P'  "Y8888   "Y8888P  "Y888 888  "Y88P"  888  888 888888888  
+ -->
+ <section>
+  <div id="contentArea" class="row" ui-view>
+
+  </div>
+
+</section>
+
+
+  <!-- 
+   .d888                  888                    
+  d88P"                   888                    
+  888                     888                    
+  888888 .d88b.   .d88b.  888888 .d88b.  888d888 
+  888   d88""88b d88""88b 888   d8P  Y8b 888P"   
+  888   888  888 888  888 888   88888888 888     
+  888   Y88..88P Y88..88P Y88b. Y8b.     888     
+  888    "Y88P"   "Y88P"   "Y888 "Y8888  888     
+                                                 
+-->
+<footer class="row">
+  <div class="large-12 columns">
+    <hr>
+    <div class="row">
+      <div class="large-6 columns">
+        <p>&copy; Climatiza.</p>
+      </div>
+      <div class="large-6 columns">
+        <ul class="inline-list right">
+          <li><a href="#/inicio">Inicio</a></li>
+          <li><a href="#/obras">Obras</a></li>
+          <li><a href="#/especialidades">Especialidades</a></li>
+          <li><a href="#/empresa">Empresa</a></li>
+          <li><a href="#/catalogo">Catálogo</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+<!-- <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script> -->
+
+
+<script src="lib/angular/angular.js"></script>
+<script src="lib/angular/angular-ui-router.js"></script>
+<script src="lib/angular/event.js"></script>
+<script src="lib/angular/keypress.js"></script>
+<script src="lib/angular/validate.js"></script>
+<script src="lib/angular/setPristine.js"></script>
+<script src="lib/jquery-1.10.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
+<script src="lib/foundation.min.js"></script>
+<script src="lib/foundation/foundation.forms.js"></script>
+<script src="lib/foundation/foundation.clearing.js"></script>
+<script src="lib/foundation/foundation.abide.js"></script>
+<script src="lib/foundation/foundation.dropdown.js"></script>
+<script src="lib/underscore-min.js"></script>
+<script src="lib/parallax.js"></script>
+<script src="lib/jquery.Jcrop.min.js"></script>
+<script src="lib/foundation/foundation.orbit.js"></script>
+<script src="lib/foundation/responsive-tables.js"></script>
+<script src="lib/jquery.zoomooz.min.js"></script>
+<script src="lib/turn.min.js"></script>
+<script src="lib/goTo.js"></script>
+<script src="js/app.js"></script>
+<script src="js/services.js"></script>
+<script src="js/controllers.js"></script>
+
+<script src="js/controllers/inicio.js"></script>
+<script src="js/controllers/auth.js"></script>
+<script src="js/controllers/users.js"></script>
+<script src="js/controllers/cotizaciones.js"></script>
+<script src="js/controllers/compras.js"></script>
+<script src="js/controllers/adminCompras.js"></script>
+<script src="js/controllers/adminCotizaciones.js"></script>
+<script src="js/controllers/soporte.js"></script>
+<script src="js/controllers/perfil.js"></script>
+<script src="js/controllers/adminUsuarios.js"></script>
+<script src="js/controllers/productos.js"></script>
+<script src="js/controllers/categorias.js"></script>
+<script src="js/controllers/obras.js"></script>
+<script src="js/controllers/adminEspecialidades.js"></script>
+<script src="js/controllers/especialidades.js"></script>
+<script src="js/controllers/adminRevistas.js"></script>
+<script src="js/controllers/public.obras.js"></script>
+<script src="js/controllers/catalogo.js"></script>
+<script src="js/controllers/empresa.js"></script>
+<script src="js/controllers/contact.js"></script>
+<script src="js/controllers/adminCtrl.js"></script>
+
+
+<script src="js/filters.js"></script>
+<script src="js/directives.js"></script>
+<script src="js/components.js"></script>
+<script src="js/Setup.js"></script>
+
+<script src="js/Vmain.js"></script>
+
+<script src="lib/upload_assets/js/jquery.knob.js"></script>
+
+<!-- jQuery File Upload Dependencies -->
+<script src="lib/upload_assets/js/jquery.ui.widget.js"></script>
+<script src="lib/upload_assets/js/jquery.iframe-transport.js"></script>
+<script src="lib/upload_assets/js/jquery.fileupload.js"></script>
+
+
+
+
+
+
+<script type="text/javascript">
+$(document).foundation();
+</script>
+
+
+
+</body>
+</html>
+
+

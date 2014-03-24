@@ -1,0 +1,139 @@
+@import url(http://weloveiconfonts.com/api/?family=zocial);
+@import url(http://weloveiconfonts.com/api/?family=entypo);
+@import url(http://weloveiconfonts.com/api/?family=fontawesome);
+@import url(http://fonts.googleapis.com/css?family=Roboto);
+
+[class*="zocial-"]:before {
+  font-family: 'zocial', sans-serif;
+}
+
+[class*="entypo-"]:before {
+  font-family: 'entypo', sans-serif;
+}
+
+[class*="fontawesome-"]:before {
+  font-family: 'fontawesome', sans-serif;
+}
+
+
+*,
+*:before,
+*:after {
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box; 
+}
+
+body,
+div,
+html{
+	margin: 0;
+	border: 0;
+	padding: 0;
+}
+
+body {
+	background:#253139;
+	font-family: 'Roboto', sans-serif;
+
+}
+
+#magCont {
+	position: relative;
+	margin: 0 auto;
+	width: 1180px;
+	height: 100%;
+	padding-bottom: 80px;
+}
+
+#magazine{
+	width:1152px;
+	height:752px;
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+}
+#magazine .turn-page{
+	background-color:#ccc;
+	background-size:100% 100%;
+}
+
+.menuMag {
+	width: 100%;
+	background: red;
+	padding: 10px;
+}
+
+.prevSlider {
+	cursor: pointer;
+	position: absolute;
+	left: -35px;
+	font-size: 50px;
+	color: white;
+	padding: 10px;
+	top: 325px;
+	border-radius: 5px;
+}
+
+.nextSlider {
+	cursor: pointer;
+	position: absolute;
+	right: -35px;
+	font-size: 50px;
+	color: white;
+	padding: 10px;
+	top: 325px;
+	border-radius: 5px;
+}
+
+.prevMags {
+	background: white;
+	min-height: 300px;
+	width: 100%; 
+}
+
+.container {
+	width: 980px;
+	position: relative;
+	margin: 0 auto;
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+
+.preMag {
+	position: relative;
+	width: 220px;
+	margin: 10px;
+	display: inline-block;
+    background: white;
+	box-shadow: 0px 0px 8px rgba(0,0,0,.5);
+	border: 1px solid whitesmoke;
+}
+
+.imgPreMag {
+	width: 100%;
+	border: 0;
+	margin: 0;
+	padding:0;
+}
+
+.preMagInfo {
+	border: 0;
+	margin: 0;
+	padding:10px;
+}
+
+.container1 {
+	width: 980px;
+	position: relative;
+	margin: 0 auto;
+	padding: 10px;
+}
+
+.revElec {
+	display: inline-block;
+	font-size: 35px;
+	color: white;
+	float: right;
+	padding-top: 28px;
+}

@@ -1,0 +1,255 @@
+<div  class="hideX">
+  <div id="title"><h2>Catálogo</h2></div>
+  <div id="section1Cont" >
+    <div id="especialidadesOrbit" class="shadow">
+      <div class="prevSlider">
+        <span class="entypo-left-dir"></span>
+      </div>
+      <div class="nextSlider">
+        <span class="entypo-right-dir"></span>
+      </div>
+      <div class="large-12">
+        <div class="slideshow-wrapper">
+          <div class="preloader"></div>
+          <ul data-orbit>
+            <li>
+              <img src="img/slider7.jpg" alt="slide image" >         
+            </li>
+            <li>
+              <img src="img/slider3.jpg" alt="slide image" >
+            </li>
+            <li>
+              <img src="img/slider10.jpg" alt="slide image" >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- REVEALS -->
+
+<div>
+
+
+  <div id="productDetails" class="reveal-modal">
+
+
+    <div class="large-5 columns">
+      <div class="large-12 columns panel">
+        <h3>{{currentProduct.Nombre}}</h3>
+        <p>
+          {{currentProduct.Descripcion}}
+        </p>
+
+
+        <a href="#"  ng-show="!!currentProduct.fichaTecnica.imageName"  data-reveal-id="productDetails" class="button meium" ng-click="showFichaTecnica()">Ficha Tecnica <i class="foundicon-paper-clip"></i></a>
+      </div>
+      <div class="large-12 columns">
+
+
+
+        <div class="row panel">
+          <label>Cantidad</label>
+          <form >
+            <!-- <div class="controls form-inline">
+
+              <input  type="number" name="cantidad" value="1" min="1" max="99"  ng-model="cantidad" required>
+              <input class="right button small" type="submit" ng-click="AgregarProducto(currentProduct, cantidad)" value="Agregar al Carrito">
+
+              
+
+            </div> -->
+
+            <div class="row collapse">
+              <div class="large-8 columns">
+                <input type="number" name="cantidad" value="1" min="1" max="99"  ng-model="cantidad" required>
+              </div>
+              <div class="large-4 columns">
+                <a class="button postfix" type="submit" ng-click="AgregarProducto(currentProduct, cantidad)">Agregar al carrito</a>
+              </div>
+            </div>
+
+          </form>
+          <div class="left">
+            <a href="">Total: </a>
+            <a href="">{{currentProduct.Precio * cantidad | currency}}</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="large-7 columns">
+
+      <div class="large-12 columns">
+        <div class="row">
+          <div class="button large-6 columns" ng-click="prevImage()" ng-show="currentProduct.imagenes.length>1"><span class="entypo-left-open-big"></span></div>
+          <div class="button large-6 columns" ng-click="nextImage()" ng-show="currentProduct.imagenes.length>1"><span class="entypo-right-open-big"></span></div>
+        </div>
+
+        
+        
+        <center>
+          <img ng-src="{{getImg('./ImagenesProductos/',currentProduct.imagenes[currentImageIndex].
+          imageName)}}">
+        </center>
+        
+
+      </ul>
+
+
+    </div><br>
+
+
+  </div>
+
+
+  <a class="close-reveal-modal" ng-click="closeProductDetails()">&#215;</a>
+
+</div>
+
+
+<!-- Ficha tecnica REVEAL -->
+
+<div id="fichaReveal" class="reveal-modal">
+
+  <img ng-src="ImagenesProductos/fichas/{{currentProduct.fichaTecnica.imageName}}">
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+
+
+
+<!-- END REVEALS -->
+
+
+
+
+<br>
+<br>
+<!-- Side Bar -->
+<div class="large-4 small-12 columns " >
+  <div class="large-12 columns panel"> 
+    <div class="row collapse">
+      <div class="large-8 columns">
+        <input type="text" placeholder="Buscar" ng-model="buscarProd">
+      </div>
+      <div class="large-4 columns">
+        <a href="#" class="button postfix"><i class="foundicon-search"></i></a>
+      </div>
+    </div>
+    <form class="custom">
+      <label for="customDropdown">Categoria</label>
+      <select id="customDropdown" ng-model="catFilter" ng-change="currentPage=1;getProductos()" ng-options="c._id as c.nombre for c in categoriasList">
+        <option value="">Todas</option>
+      </select>
+
+      <!-- <option ng-repeat="c in categoriasList" value="c._id">{{c.nombre}}</option> -->
+
+      <label for="customDropdown">Ordenar</label>
+      <select id="customDropdown2" ng-model="sortFilter" ng-change="currentPage=1;getProductos()"/>
+      <option value="" selected="selected">Seleccionar</option>
+      <option value="Fecha|Descending">Recientes</option>
+      <!-- <option value="Fecha|Ascending">Otro</option> -->
+      <option value="Nombre|Ascending">A-Z</option>
+      <option value="Nombre|Descending">Z-A</option>
+      <option value="Precio|Ascending">Precio de menor a mayor</option>
+      <option value="Precio|Descending">Precio de mayor a menor</option>
+    </select>
+  </form>  
+  <form class="custom">
+  </form>  
+</div>
+
+<div class="large-12 columns panel"> 
+  <h3>Carrito</h3><hr>
+  <h5 ng-show="Carrito.length == 0"> No hay productos</h5>
+  <div ng-show="Carrito.length > 0">
+
+
+    <table width="100%" class="cartTable" >
+      <thead>
+        <tr>
+          <th >Modelo</th>
+          <th >Cant</th>
+          <th >Precio</th>
+          <th ><span class="entypo-tools"></span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="p in Carrito">
+          <td>{{p.Nombre}}</td>
+          <td>{{p.cantidad}}</td>
+          <td>{{p.cantidad*p.Precio | currency}}</td>
+          <td>
+            <a href="" ng-click="RemoveProducto(p)">
+              <i class="foundicon-trash remove black"></i>
+            </a>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+
+    <span class="black right">Total: {{GetCurrentTotal() | currency}}</span>
+  </div>
+  <br>
+  <br>
+
+</div>
+<div class="button small large-12" ng-click="procesarCotizacion('Guardar')">
+  <span class="entypo-floppy"> Guardar</span>
+</div>
+</div>
+<!-- End Side Bar -->
+
+<!-- Thumbnails -->
+<div class="large-8 columns" id="productosCatalogo">
+
+  <div class="row">
+
+    <div ng-repeat="p in productosList | filter:buscarProd" >
+      <div class="large-4 small-6 columns " ng-class="{clear:$index%3==0}">
+
+
+
+        <!-- <center><img src="./tmp/{{p.thumb.imageName}}.png"/ ng-click="showProductDetails(p)"></center> -->
+        <center class="prShadow"><img ng-src="{{getImg('./ImagenesProductos/thumbs/',p.thumb.imageName,'.png')}}" ng-click="showProductDetails(p)"/></center>
+        <div class="panel prShadow">
+          <h6 class="subheader">{{p.Nombre}}</h6>
+          <h5>{{p.Descripcion}}</h5>
+          <h6 class="subheader">{{p.Precio | currency}}</h6>
+        </div>
+      </div> 
+    </div> 
+  </div>
+
+  <!-- End Thumbnails -->
+
+  <br>
+  <div class="pagination-centered">
+    <ul class="pagination" ng-show="totalPages>1">
+      <li class="arrow" ng-class="{unavailable: currentPage-1 == 0}"
+
+
+      ng-click="setPage(currentPage-1)"
+      ><a href="">&laquo;</a></li>
+
+
+
+      <li  ng-click="setPage($index+1)" ng-class="{current :$index+1 == currentPage}" ng-repeat="i in getNumber(totalPages)"><a href="">{{$index+1}}</a></li>
+
+
+
+      <li class="arrow" ng-class="{unavailable: currentPage+1 > totalPages}"
+
+        ng-click="setPage(currentPage+1)"
+        ><a href="">&raquo;</a></li>
+      </ul>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,30 @@
+
+<h3><span class="entypo-mail"></span> Perfil</h3>
+
+<div class="large-12 columns">
+	<form action="" name="frmPerfil">
+		<div>
+			<span class="black">Nombre:</span>
+			<input type="text" ng-model="currentUser.nombreCompleto" >
+		</div>
+		<div>
+			<span class="black">email:</span>
+			<input type="email" ng-model="currentUser.email" unique-email-edit name="email">
+			   <small class="error" ng-show=" frmPerfil.email.$dirty && frmPerfil.email.$error.uniqueEmailEdit" >El email no esta disponible
+    </small>
+
+		</div>
+		
+		<div>
+			<span class="black">Telefono:</span>
+			<input type="text" ng-model="currentUser.telefono">
+		</div>
+		<div>
+			<span class="black">Direccion:</span>
+			<input type="text" ng-model="currentUser.direccion">
+		</div>
+		
+		<div><input type="submit" class="small button" value="Actualizar" ng-click="acutualizarUsuario()"></div>
+
+	</form>
+</div>

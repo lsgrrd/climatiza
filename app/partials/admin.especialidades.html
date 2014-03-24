@@ -1,0 +1,64 @@
+<div class="row">
+  <div class="large-12 columns">
+    <h3><span class="entypo-hearth"></span>  Especialidades</h3>   
+  </div>
+</div>
+
+<table width="100%">
+  <thead>
+    <tr>
+      <th>Titulo</th>
+      <th>Nombre</th>
+      <th>Descripción</th>
+      <th>Video</th>
+
+      <th><i class="foundicon-tools"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="esp in especialidadesList">
+      <td>{{esp.titulo}}</td>
+      <td>{{esp.nombre}}</td>
+      <td>{{esp.descripcion}}</td>
+
+      
+      <td><span ng-class="{'entypo-check':esp.video,'entypo-cancel':!esp.video}"></td>
+
+      <td>
+      	<i class="foundicon-edit" ng-click="editarEspecialidad(esp)"></i>
+      	<i class="foundicon-trash" ng-click="eliminarEspecialidad(esp)"></i>
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+
+<div class="row">
+  <div class="large-12 columns">
+    <span class="right button small" data-reveal-id="espModal" ng-click="mode='Agregar'" >Agregar Especialidad</span>
+  </div>
+</div>
+
+<div id="espModal" class="reveal-modal full-modal small">
+  <form  name="frmEspecialidad" id="frmEspecialidad" action="">
+  	<h3>{{mode}} Especialidad</h3>
+  	<input type="text" ng-model="esp.titulo" name="titulo" placeholder="Titulo" required>
+    <small class="error" ng-show="checkError('titulo','required')" >El titulo es requerido
+    </small>
+    <input type="text" ng-model="esp.nombre" name="nombre" placeholder="Nombre" required>
+
+    <small class="error" ng-show="checkError('nombre','required')" >El nombre es requerido
+    </small>
+
+    <input type="text" ng-model="esp.video" name="video" placeholder="Video">
+
+    
+    <textarea  cols="30" rows="10" name="descripcion" ng-model="esp.descripcion" placeholder="Descripcion" required></textarea>
+
+    <small class="error" ng-show="checkError('descripcion','required')" >La descripción es requerido
+    </small>
+    <button type="submit" ng-show="mode=='Agregar'" ng-disabled="frmEspecialidad.$invalid" ng-click="agregarEspecialidad(esp)">Guardar</button>
+    <button type="submit" ng-show="mode=='Editar'" ng-disabled="frmEspecialidad.$invalid" ng-click="actualizarEspecialidad(esp)">Actualizar</button>
+  </form>
+  <a class="close-reveal-modal">&#215;</a>
+</div>

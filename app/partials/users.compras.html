@@ -1,0 +1,59 @@
+<div>
+	<h4>Compras</h4>
+	<div><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea, error, pariatur, repudiandae, tempore praesentium nobis nihil facilis deserunt obcaecati molestiae minus sunt accusamus eius culpa distinctio atque dicta id explicabo.</p></div>
+
+	<hr>
+
+
+	<h5 ng-show="comprasList.length == 0" > No se han realizado compras</h5>
+ 
+	<div ng-repeat="com in comprasList">
+		
+		<div ng-show"com.numeroFactura">
+			<span class="black">Factura: {{com.numeroFactura}}</span>
+			<br/>
+			<br/>
+		</div>
+		
+		
+		<span class="black">Compra {{$index+1}}</span>
+		<span class="black"> -- {{com.estado}}</span>
+		<span class="right black"><span class="entypo-calendar"></span> Fecha de compra: {{com.Fecha | date:'MM/dd/yyyy'}} </span>
+		<br>
+		<br>
+		<table width="100%">
+			<thead>
+				<tr>
+					<th>Modelo del producto</th>
+					<th>Descripcion</th>
+					<th>Precio unitario</th>
+					<th>Cantidad</th>
+					<th>Precio Neto</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="p in com.productos">
+					<td>{{p.Nombre}}</td>
+					<td>{{p.Descripcion}}</td>
+					<td>{{p.Precio | currency }}</td>
+					<td>{{p.cantidad}}</td>
+					<td>{{p.cantidad*p.Precio | currency}}</td>
+				</tr>
+				
+
+			</tbody>
+		</table>
+		<div class="row">
+			<div class="large-12 columns">
+				
+				<button class="button tiny " ng-click="cancelarCompra(com._id)"><i class="foundicon-trash"></i> Cancelar</button>
+				<a class="button tiny " href="/imprimirCotizacion?_id={{com._id}}" target="_blank"><span class="entypo-print"></span> Imprimir</a>
+				<span class="right black">Total: {{getTotal(com) | currency}}</span>
+			</div>
+		</div>
+		<br><br><hr>
+	</div>		
+	
+
+
+</div>
